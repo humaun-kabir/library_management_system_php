@@ -1,5 +1,11 @@
 <?php
     require_once '../dbcon.php';
+
+    session_start();
+
+    if(isset($_SESSION['librarian_login'])){
+       header('Location: index.php');
+       }
     if(isset($_POST['login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -8,6 +14,7 @@
         if(mysqli_num_rows($result) == 1){
             $row = mysqli_fetch_assoc($result);
             if($row['password'] == $password ){
+                $_SESSION['librarian_login'] = $email;
                 header('Location: index.php');
             }else{
                 $error = "password invalid";

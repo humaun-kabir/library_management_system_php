@@ -4,9 +4,9 @@
 
    session_start();
 
-   if(!isset($_SESSION['student_login'])){
-       header('Location: sign-in.php');
-   }
+    if(!isset($_SESSION['librarian_login'])){
+       header('Location: login.php');
+       }
 ?>
 <!doctype html>
 <html lang="en" class="fixed left-sidebar-top">

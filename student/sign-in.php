@@ -1,5 +1,10 @@
 <?php
     require_once '../dbcon.php';
+    session_start();
+    if(isset($_SESSION['student_login'])){
+        header('Location: index.php');
+    }
+
     if(isset($_POST['login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -9,7 +14,8 @@
             $row = mysqli_fetch_assoc($result);
             if(password_verify($password,$row['password'])){
                 if($row['status'] == 1){
-                    echo "yes";
+                    $_SESSION['student_login'] = $email;
+                    header('Location: index.php');
                 }else{
                     $error = "status inactive";
                 }
