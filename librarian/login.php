@@ -4,15 +4,11 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $result = mysqli_query($con,"SELECT * FROM 'students' WHERE 'email' = '$email' OR 'username' = '$email'");
+        $result = mysqli_query($con,"SELECT * FROM 'librarian' WHERE 'email' = '$email' OR 'username' = '$email'");
         if(mysqli_num_rows($result) == 1){
             $row = mysqli_fetch_assoc($result);
-            if(password_verify($password,$row['password'])){
-                if($row['status'] == 1){
-                    echo "yes";
-                }else{
-                    $error = "status inactive";
-                }
+            if($row['password'] == $password ){
+                header('Location: index.php');
             }else{
                 $error = "password invalid";
             }
@@ -83,9 +79,7 @@
                         </div>
                         <div class="form-group text-center">
                             <a href="pages_forgot-password.html">Forgot password?</a>
-                            <hr/>
-                             <span>Don't have an account?</span>
-                            <a href="register.php" class="btn btn-block mt-sm">Register</a>
+                            
                         </div>
                     </form>
                 </div>
