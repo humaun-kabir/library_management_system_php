@@ -2,6 +2,8 @@
    $page = explode('/',$_SERVER['PHP_SELF']);
    $page = end($page);
 
+   require_once '../dbcon.php';
+
    session_start();
 
     if(!isset($_SESSION['librarian_login'])){
@@ -31,6 +33,9 @@
     <link rel="stylesheet" href="../assets/vendor/toastr/toastr.min.css">
     <!--Magnific popup-->
     <link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css">
+
+    <!--dataTable-->
+    <link rel="stylesheet" href="../assets/vendor/data-table/media/css/dataTables.bootstrap.min.css">
     <!--TEMPLATE css-->
     <!-- ========================================================= -->
     <link rel="stylesheet" href="../assets/../assets/stylesheets/css/style.css">
@@ -180,7 +185,7 @@
                             <ul class="nav nav-left-lines" id="main-nav">
                                 <!--HOME-->
                                 <li class="<?php $page == 'index.php' ? 'active-item':''  ?>"><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i><span>Dashboard</span></a></li>
-                                <li class="<?php $page == 'test.php' ? 'active-item':''  ?>"><a href="test.php"><i class="fa fa-home" aria-hidden="true"></i><span>Test</span></a></li>
+                                <li class="<?php $page == 'students.php' ? 'active-item':''  ?>"><a href="students.php"><i class="fa fa-users" aria-hidden="true"></i><span>Students</span></a></li>
                                 
 
                                 
