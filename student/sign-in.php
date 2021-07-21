@@ -1,3 +1,25 @@
+<?php
+    require_once '../dbcon.php';
+    if(isset($_POST['login'])){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $result = mysqli_query($con,"SELECT * FROM 'students' WHERE 'email' = '$email' OR 'username' = '$email'");
+        if(mysqli_num_rows($result) == 1){
+            $row = mysqli_fetch_assoc($result);
+            if(password_verify($password,$row['password'])){
+                echo "yes";
+            }else{
+                $error = "password invalid";
+            }
+        }else{
+            $error = "Email or username invalid";
+        }
+
+        
+    }
+
+?>
 <!doctype html>
 <html lang="en" class="fixed accounts sign-in">
 
@@ -32,16 +54,16 @@
             <!--SIGN IN FORM-->
             <div class="panel mb-none">
                 <div class="panel-content bg-scale-0">
-                    <form>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="form-group mt-md">
                             <span class="input-with-icon">
-                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                <input type="text" class="form-control" id="email" placeholder="Email" name="email" value="<?php isset($email) ? $email:'' ?>">
                                 <i class="fa fa-envelope"></i>
                             </span>
                         </div>
                         <div class="form-group">
                             <span class="input-with-icon">
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                                 <i class="fa fa-key"></i>
                             </span>
                         </div>
@@ -52,13 +74,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <a href="index.html" class="btn btn-primary btn-block">Sign in</a>
+                            <input type="submit" value="Sign in" class="btn btn-primary btn-block" name="login">
+                            
                         </div>
                         <div class="form-group text-center">
                             <a href="pages_forgot-password.html">Forgot password?</a>
                             <hr/>
                              <span>Don't have an account?</span>
-                            <a href="pages_register.html" class="btn btn-block mt-sm">Register</a>
+                            <a href="register.php" class="btn btn-block mt-sm">Register</a>
                         </div>
                     </form>
                 </div>
